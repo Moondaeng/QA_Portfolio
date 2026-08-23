@@ -32,8 +32,7 @@ Selenium과 pytest로 AI 채팅 서비스의 핵심 사용자 흐름을 검증�
 
 https://github.com/user-attachments/assets/192e4f83-c88c-44f2-a26d-ab35afefd56d
 
-
-> AI 응답 대기 등 일부 구간은 배속 편집했습니다.  
+> AI 응답 대기 등 일부 구간은 배속 편집했습니다.
 
 ## 테스트 우선순위를 정한 이유
 
