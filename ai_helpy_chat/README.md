@@ -31,7 +31,8 @@ Selenium과 pytest로 AI 채팅 서비스의 핵심 사용자 흐름을 검증�
 
 ## 실행 영상
 
-https://github.com/user-attachments/assets/78a642f6-917c-4957-afe7-22f015db0a7f
+https://github.com/user-attachments/assets/192e4f83-c88c-44f2-a26d-ab35afefd56d
+
 
 > AI 응답 대기 등 일부 구간은 배속 편집했습니다.  
 > 전체 실행 결과는 `4 passed in 201.09s (0:03:21)`이며, 상세 과정은 [최종 실행 로그](./logs/test_20260804_202155.log)에서 확인할 수 있습니다.
