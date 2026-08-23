@@ -21,7 +21,6 @@ Selenium과 pytest로 AI 채팅 서비스의 핵심 사용자 흐름을 검증�
 | 자동화 범위     | TC 항목 기준 72개 중 62개 구현, 회원가입 10개 미구현    |
 | 실행 단위       | pytest 시나리오 4개: E2E·AI 응답·에이전트 생성·사이드바 |
 | 최종 실행 결과  | `4 passed in 201.09s (0:03:21)`                         |
-| 실행 증적       | 2분 18초 편집 영상, 실행 시각별 로그                    |
 | 설계            | Page Object Model, BasePage, pytest Fixture             |
 | 현재 상태       | 대상 개발 서버 종료로 동일 환경 재실행 불가             |
 
@@ -29,12 +28,12 @@ Selenium과 pytest로 AI 채팅 서비스의 핵심 사용자 흐름을 검증�
 
 <a name="execution-video"></a>
 
-## 실행 영상
+### 실행 영상
 
-https://github.com/user-attachments/assets/78a642f6-917c-4957-afe7-22f015db0a7f
+https://github.com/user-attachments/assets/192e4f83-c88c-44f2-a26d-ab35afefd56d
+
 
 > AI 응답 대기 등 일부 구간은 배속 편집했습니다.  
-> 전체 실행 결과는 `4 passed in 201.09s (0:03:21)`이며, 상세 과정은 [최종 실행 로그](./logs/test_20260804_202155.log)에서 확인할 수 있습니다.
 
 ## 테스트 우선순위를 정한 이유
 
@@ -185,7 +184,7 @@ React·MUI 화면에서는 같은 Locator를 가진 요소가 DOM에 여러 개 
 └── README.md
 ```
 
-## 실행 환경과 최종 결과
+## 실행 환경과 실행 기록
 
 ### 기록된 실행 환경
 
@@ -207,15 +206,10 @@ pytest -m firefox
 
 테스트 계정은 공개 저장소에 포함하지 않기 위해 [`firefox_test_data.py`](./tests/firefox/firefox_test_data.py)에서 제거했습니다.
 
-### 최종 실행 결과
-
-```text
-4 passed in 201.09s (0:03:21)
-```
+### 실행 기록
 
 - 실행일: 2026-08-04
-- 편집 영상 길이: 2분 18초
-- E2E, AI 응답, 에이전트 생성, 사이드바 테스트 전체 통과
+- 기록 대상: E2E, AI 응답, 에이전트 생성, 사이드바 테스트
 - 마지막 실행 과정: [`logs/test_20260804_202155.log`](./logs/test_20260804_202155.log)
 
 로그에는 테스트별 시작·완료 시각과 주요 단계가 기록되어 있습니다. 각 테스트가 별도의 Firefox Driver를 사용하고,  
