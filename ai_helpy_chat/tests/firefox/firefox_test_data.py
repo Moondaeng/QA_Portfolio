@@ -1,0 +1,21 @@
+class FirefoxTestData:
+    # Account
+    TEST_USER_ID = ""
+    TEST_PASSWORD = ""
+
+    # Test Data
+    SAMPLE_QUESTION_INDEX = 2
+    RECOMMEND_QUESTION_INDEX = -1
+    SEARCH_CHAT_ROOM_INDEX = 2
+    SEARCH_RESULT_INDEX = 2
+    SELECT_AGENT_INDEX = 2
+    AI_MESSAGE_INDEX = -1
+    CANCEL_BUTTON_OK = True
+    CANCEL_BUTTON_NO = False
+    CHAT_ROOM_INDEX = 5
+    AGENT_CATEGORY_INDEX = 3
+    
+
+    # Scroll
+    SCROLL_Y = 500
+    SCROLL_REPEAT_COUNT = 3

@@ -1,0 +1,25 @@
+[2026-08-04 19:02:12] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 19:02:14] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 19:02:22] [INFO] [test_firefox_E2E] Firefox E2E 테스트 시작
+[2026-08-04 19:02:22] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 19:02:28] [INFO] [test_firefox_E2E] 로그인 동작 완료
+[2026-08-04 19:02:32] [INFO] [test_firefox_E2E] 개인 토큰 팝업 확인 완료
+[2026-08-04 19:02:33] [INFO] [test_firefox_E2E] 샘플 질문 선택 완료
+[2026-08-04 19:02:38] [INFO] [test_firefox_E2E] 웹 검색 질문 전송 완료
+[2026-08-04 19:02:49] [INFO] [test_firefox_E2E] 웹 검색 AI 응답 완료
+[2026-08-04 19:03:02] [INFO] [test_firefox_E2E] 사이드바 채팅 목록 왕복 스크롤 완료
+[2026-08-04 19:03:03] [INFO] [test_firefox_E2E] 후속 질문 메시지 전송 완료
+[2026-08-04 19:03:07] [INFO] [test_firefox_E2E] 이미지 생성 요청 완료
+[2026-08-04 19:03:23] [INFO] [test_firefox_E2E] 이미지 생성 AI 응답 완료
+[2026-08-04 19:03:26] [INFO] [test_firefox_E2E] 사이드바 채팅방 검색 및 선택 완료
+[2026-08-04 19:03:30] [INFO] [test_firefox_E2E] 선택한 채팅방의 AI 응답 완료
+[2026-08-04 19:04:04] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 19:04:05] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 19:04:13] [INFO] [test_firefox_ai_response] AI 응답 기능 테스트 시작
+[2026-08-04 19:04:13] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 19:04:19] [INFO] [test_firefox_ai_response] 로그인 동작 완료
+[2026-08-04 19:04:21] [INFO] [test_firefox_ai_response] 개인 토큰 팝업 확인 완료
+[2026-08-04 19:04:26] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 19:04:27] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 19:04:36] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 19:04:37] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version

@@ -1,0 +1,14 @@
+[2026-08-04 19:31:00] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 19:31:01] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 19:31:08] [INFO] [test_firefox_E2E] Firefox E2E 테스트 시작
+[2026-08-04 19:31:08] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 19:31:13] [INFO] [test_firefox_E2E] 로그인 동작 완료
+[2026-08-04 19:31:16] [INFO] [test_firefox_E2E] 개인 토큰 팝업 확인 완료
+[2026-08-04 19:31:17] [INFO] [test_firefox_E2E] 샘플 질문 선택 완료
+[2026-08-04 19:31:20] [INFO] [test_firefox_E2E] 웹 검색 질문 전송 완료
+[2026-08-04 19:31:31] [INFO] [test_firefox_E2E] 웹 검색 AI 응답 완료
+[2026-08-04 19:31:39] [INFO] [test_firefox_E2E] 사이드바 채팅 목록 왕복 스크롤 완료
+[2026-08-04 19:31:40] [INFO] [test_firefox_E2E] 후속 질문 메시지 전송 완료
+[2026-08-04 19:31:42] [INFO] [test_firefox_E2E] 이미지 생성 요청 완료
+[2026-08-04 19:31:47] [INFO] [test_firefox_E2E] 이미지 생성 AI 응답 완료
+[2026-08-04 19:31:48] [INFO] [test_firefox_E2E] 사이드바 채팅방 검색 및 선택 완료

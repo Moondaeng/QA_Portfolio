@@ -1,0 +1,12 @@
+.venv/
+.pytest_cache/
+.vscode/
+# 모든 경로의 .pyc 파일 무시
+**/*.pyc
+# 모든 경로의 __pycache__ 디렉터리 무시
+**/__pycache__/
+dist/
+build/
+reports/
+
+# 아직 정리 중인 설정 파일들 (임시 제외)

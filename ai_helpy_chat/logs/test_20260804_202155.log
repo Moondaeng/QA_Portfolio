@@ -1,0 +1,52 @@
+[2026-08-04 20:21:56] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 20:21:57] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 20:22:05] [INFO] [test_firefox_E2E] Firefox E2E 테스트 시작
+[2026-08-04 20:22:05] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 20:22:10] [INFO] [test_firefox_E2E] 로그인 동작 완료
+[2026-08-04 20:22:13] [INFO] [test_firefox_E2E] 개인 토큰 팝업 확인 완료
+[2026-08-04 20:22:14] [INFO] [test_firefox_E2E] 샘플 질문 선택 완료
+[2026-08-04 20:22:18] [INFO] [test_firefox_E2E] 웹 검색 질문 전송 완료
+[2026-08-04 20:22:30] [INFO] [test_firefox_E2E] 웹 검색 AI 응답 완료
+[2026-08-04 20:22:37] [INFO] [test_firefox_E2E] 사이드바 채팅 목록 왕복 스크롤 완료
+[2026-08-04 20:22:38] [INFO] [test_firefox_E2E] 후속 질문 메시지 전송 완료
+[2026-08-04 20:22:41] [INFO] [test_firefox_E2E] 이미지 생성 요청 완료
+[2026-08-04 20:22:55] [INFO] [test_firefox_E2E] 이미지 생성 AI 응답 완료
+[2026-08-04 20:22:56] [INFO] [test_firefox_E2E] 사이드바 채팅방 검색 및 선택 완료
+[2026-08-04 20:23:00] [INFO] [test_firefox_E2E] 선택한 채팅방의 AI 응답 완료
+[2026-08-04 20:23:08] [INFO] [test_firefox_E2E] 채팅방 이름 변경 완료
+[2026-08-04 20:23:15] [INFO] [test_firefox_E2E] 채팅방 삭제 완료
+[2026-08-04 20:23:16] [INFO] [test_firefox_E2E] 에이전트 선택 완료
+[2026-08-04 20:23:18] [INFO] [test_firefox_E2E] Firefox E2E 테스트 완료
+[2026-08-04 20:23:21] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 20:23:22] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 20:23:30] [INFO] [test_firefox_ai_response] AI 응답 기능 테스트 시작
+[2026-08-04 20:23:30] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 20:23:35] [INFO] [test_firefox_ai_response] 로그인 동작 완료
+[2026-08-04 20:23:38] [INFO] [test_firefox_ai_response] 개인 토큰 팝업 확인 완료
+[2026-08-04 20:23:40] [INFO] [test_firefox_ai_response] 사이드바 채팅방 키워드 검색 완료
+[2026-08-04 20:23:43] [INFO] [test_firefox_ai_response] 질문 메시지 전송 완료
+[2026-08-04 20:23:50] [INFO] [test_firefox_ai_response] AI 추천 질문 선택 완료
+[2026-08-04 20:24:00] [INFO] [test_firefox_ai_response] AI 응답 복사 버튼 클릭 완료
+[2026-08-04 20:24:02] [INFO] [test_firefox_ai_response] AI 응답 재생성 버튼 클릭 완료
+[2026-08-04 20:24:04] [INFO] [test_firefox_ai_response] AI 응답 기능 테스트 완료
+[2026-08-04 20:24:07] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 20:24:08] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 20:24:16] [INFO] [test_firefox_make_agent] 에이전트 만들기 테스트 시작
+[2026-08-04 20:24:16] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 20:24:21] [INFO] [test_firefox_make_agent] 로그인 동작 완료
+[2026-08-04 20:24:24] [INFO] [test_firefox_make_agent] 개인 토큰 팝업 확인 완료
+[2026-08-04 20:24:24] [INFO] [test_firefox_make_agent] 새 에이전트 만들기 화면 진입 완료
+[2026-08-04 20:24:26] [INFO] [test_firefox_make_agent] 에이전트 만들기 메뉴 선택 완료
+[2026-08-04 20:24:33] [INFO] [test_firefox_make_agent] 에이전트 기본 정보 입력 완료
+[2026-08-04 20:24:34] [INFO] [test_firefox_make_agent] 에이전트 미리보기 메시지 전송 완료
+[2026-08-04 20:24:35] [INFO] [test_firefox_make_agent] 에이전트 만들기 완료
+[2026-08-04 20:24:37] [INFO] [test_firefox_make_agent] 에이전트 만들기 테스트 완료
+[2026-08-04 20:24:40] [INFO] [WDM] ====== WebDriver manager ======
+[2026-08-04 20:24:41] [INFO] [WDM] Driver [C:\Users\moondaeng\.wdm\drivers\geckodriver\win64\v0.37.1\geckodriver.exe] found in cache by browser version
+[2026-08-04 20:24:48] [INFO] [test_firefox_sidebar] 사이드바 더보기 메뉴 테스트 시작
+[2026-08-04 20:24:48] [INFO] [src.firefoxPages.base_page] 페이지 이동: url=https://dev-qaproject-helpy-chat.dev.elicer.io/
+[2026-08-04 20:24:53] [INFO] [test_firefox_sidebar] 로그인 동작 완료
+[2026-08-04 20:24:56] [INFO] [test_firefox_sidebar] 개인 토큰 팝업 확인 완료
+[2026-08-04 20:25:04] [INFO] [test_firefox_sidebar] 사이드바에서 채팅방 이름 변경 완료
+[2026-08-04 20:25:12] [INFO] [test_firefox_sidebar] 사이드바에서 채팅방 삭제 완료
+[2026-08-04 20:25:14] [INFO] [test_firefox_sidebar] 사이드바 더보기 메뉴 테스트 완료
