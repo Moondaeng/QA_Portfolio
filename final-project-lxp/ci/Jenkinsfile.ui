@@ -1,0 +1,345 @@
+pipeline {
+
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+        timeout(time: 40, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        skipDefaultCheckout(true)
+    }
+
+    environment {
+        PATH = "${HOME}/.local/bin:${PATH}"
+        HEADLESS = 'true'
+        POETRY_VIRTUALENVS_IN_PROJECT = 'true'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                // 이전 빌드 결과가 섞이지 않도록 정리
+                dir('reports/ui') {
+                    deleteDir()
+                }
+
+                dir('logs') {
+                    deleteDir()
+                }
+
+                checkout scm
+            }
+        }
+
+        stage('Prepare Python and Browser') {
+            steps {
+                sh '''
+                    set -eu
+
+                    command -v uv
+                    command -v poetry
+
+                    google-chrome --version
+
+                    uv python install 3.13
+                    poetry env use "$(uv python find 3.13)"
+
+                    poetry install --no-interaction
+
+                    poetry run python --version
+                    poetry run python -m pytest --version
+                '''
+            }
+        }
+
+        stage('UI Full Tests') {
+            steps {
+                withCredentials([
+                    file(
+                        credentialsId: 'lxp-ui-env',
+                        variable: 'UI_ENV_FILE'
+                    )
+                ]) {
+                    sh '''
+                        set +x
+
+                        poetry run python - <<'PY'
+import os
+import subprocess
+import sys
+
+from dotenv import load_dotenv
+
+
+load_dotenv(
+    os.environ["UI_ENV_FILE"],
+    override=False,
+)
+
+os.environ["HEADLESS"] = "true"
+
+required = (
+    "BASE_URL",
+    "EDUCATOR_EMAIL",
+    "EDUCATOR_PASSWORD",
+    "LEARNER_EMAIL",
+    "LEARNER_PASSWORD",
+)
+
+missing = [
+    name
+    for name in required
+    if not os.environ.get(name, "").strip()
+]
+
+if missing:
+    sys.exit(
+        "Missing UI environment variables: "
+        + ", ".join(missing)
+    )
+
+result = subprocess.run(
+    [
+        sys.executable,
+        "-m",
+        "pytest",
+        "tests/learner",
+        "tests/educator",
+        "-n",
+        "2",
+        "--dist=loadfile",
+        "--junitxml=reports/ui/junit.xml",
+        "--alluredir=reports/ui/allure-results",
+        "--clean-alluredir",
+    ],
+    check=False,
+)
+
+sys.exit(result.returncode)
+PY
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+
+        always {
+
+            script {
+
+                // ==================================================
+                // 1. 테스트 산출물 보관
+                // ==================================================
+
+                catchError(
+                    buildResult: 'FAILURE',
+                    stageResult: 'FAILURE'
+                ) {
+                    archiveArtifacts(
+                        artifacts: 'reports/ui/**,logs/runtime/**,logs/traceback/**,logs/pytest/**,logs/screenshots/**',
+                        allowEmptyArchive: true
+                    )
+                }
+
+
+                // ==================================================
+                // 2. JUnit 결과 게시
+                // ==================================================
+
+                if (fileExists('reports/ui/junit.xml')) {
+
+                    catchError(
+                        buildResult: 'FAILURE',
+                        stageResult: 'FAILURE'
+                    ) {
+                        junit(
+                            testResults: 'reports/ui/junit.xml',
+                            allowEmptyResults: false
+                        )
+                    }
+
+                } else {
+
+                    echo 'JUnit 결과가 없어 게시하지 않습니다: reports/ui/junit.xml'
+                }
+
+
+                // ==================================================
+                // 3. Google Sheets - Selenium History 기록
+                // ==================================================
+
+                if (fileExists('reports/ui/junit.xml')) {
+
+                    withCredentials([
+
+                        file(
+                            credentialsId: 'lxp-qa-dashboard-credentials',
+                            variable: 'GOOGLE_APPLICATION_CREDENTIALS'
+                        ),
+
+                        string(
+                            credentialsId: 'lxp-qa-dashboard-sheet-id',
+                            variable: 'GOOGLE_SHEET_ID'
+                        )
+
+                    ]) {
+
+                        withEnv([
+                            'SELENIUM_TEST_TYPE=FULL'
+                        ]) {
+
+                            catchError(
+                                buildResult: 'FAILURE',
+                                stageResult: 'FAILURE'
+                            ) {
+
+                                sh '''
+                                    echo "===== Update Selenium FULL History ====="
+
+                                    poetry run python ci/update_selenium_google_sheet.py \
+                                        || echo "[Google Sheets] Selenium FULL dashboard update failed"
+                                '''
+                            }
+                        }
+                    }
+
+                } else {
+
+                    echo '[Google Sheets] FULL JUnit 결과가 없어 Selenium History를 업데이트하지 않습니다.'
+                }
+
+
+                // ==================================================
+                // 4. Google Sheets - Selenium 원본 TC Result 업데이트
+                //
+                // 중요:
+                // TC Status를 만들기 전에 원본 TC Result를 먼저 갱신
+                // ==================================================
+
+                if (fileExists('reports/ui/junit.xml')) {
+
+                    withCredentials([
+
+                        file(
+                            credentialsId: 'lxp-qa-dashboard-credentials',
+                            variable: 'GOOGLE_APPLICATION_CREDENTIALS'
+                        ),
+
+                        string(
+                            credentialsId: 'lxp-selenium-tc-sheet-id',
+                            variable: 'SELENIUM_TC_SHEET_ID'
+                        )
+
+                    ]) {
+
+                        withEnv([
+                            'SELENIUM_TEST_TYPE=FULL'
+                        ]) {
+
+                            catchError(
+                                buildResult: 'FAILURE',
+                                stageResult: 'FAILURE'
+                            ) {
+
+                                sh '''
+                                    echo "===== Update Selenium FULL TC Result ====="
+
+                                    poetry run python ci/update_selenium_tc_result.py \
+                                        || echo "[Google Sheets] Selenium FULL TC Result update failed"
+                                '''
+                            }
+                        }
+                    }
+
+                } else {
+
+                    echo '[Google Sheets] FULL JUnit 결과가 없어 Selenium TC Result를 업데이트하지 않습니다.'
+                }
+
+
+                // ==================================================
+                // 5. Integrated TC Status Dashboard Update
+                //
+                // 원본 Selenium TC Result 업데이트 이후 실행
+                // ==================================================
+
+                if (fileExists('reports/ui/junit.xml')) {
+
+                    withCredentials([
+
+                        file(
+                            credentialsId: 'lxp-qa-dashboard-credentials',
+                            variable: 'GOOGLE_APPLICATION_CREDENTIALS'
+                        ),
+
+                        string(
+                            credentialsId: 'lxp-qa-dashboard-sheet-id',
+                            variable: 'GOOGLE_SHEET_ID'
+                        ),
+
+                        string(
+                            credentialsId: 'lxp-api-tc-sheet-id',
+                            variable: 'API_TC_SHEET_ID'
+                        ),
+
+                        string(
+                            credentialsId: 'lxp-selenium-tc-sheet-id',
+                            variable: 'SELENIUM_TC_SHEET_ID'
+                        )
+
+                    ]) {
+
+                        catchError(
+                            buildResult: 'FAILURE',
+                            stageResult: 'FAILURE'
+                        ) {
+
+                            sh '''
+                                echo "===== Update TC Status Dashboard ====="
+
+                                poetry run python ci/update_tc_status_dashboard.py \
+                                    || echo "TC Status update unavailable. Continue CI."
+                            '''
+                        }
+                    }
+
+                } else {
+
+                    echo '[Google Sheets] FULL JUnit 결과가 없어 TC Status를 업데이트하지 않습니다.'
+                }
+
+
+                // ==================================================
+                // 6. Allure 결과 게시
+                // ==================================================
+
+                if (fileExists('reports/ui/allure-results')) {
+
+                    catchError(
+                        buildResult: 'FAILURE',
+                        stageResult: 'FAILURE'
+                    ) {
+
+                        allure(
+                            includeProperties: false,
+                            jdk: '',
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [
+                                [
+                                    path: 'reports/ui/allure-results'
+                                ]
+                            ]
+                        )
+                    }
+
+                } else {
+
+                    echo 'Allure 결과가 없어 게시하지 않습니다: reports/ui/allure-results'
+                }
+            }
+        }
+    }
+}
